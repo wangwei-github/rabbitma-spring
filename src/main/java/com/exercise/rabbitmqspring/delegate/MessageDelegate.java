@@ -3,6 +3,7 @@ package com.exercise.rabbitmqspring.delegate;
 import com.exercise.rabbitmqspring.entity.Order;
 import com.exercise.rabbitmqspring.entity.Packaged;
 
+import java.io.File;
 import java.util.Map;
 
 public class MessageDelegate {
@@ -31,10 +32,14 @@ public class MessageDelegate {
     }
 
     public void consumeMessage(Order messageBody) {
-        System.err.println("consumeMessage order: " + messageBody);
+        System.err.println("consumeMessage order: " + messageBody.getName());
     }
 
     public void consumeMessage(Packaged messageBody) {
-        System.err.println("consumeMessage packaged: " + messageBody);
+        System.err.println("consumeMessage packaged: " + messageBody.getName());
+    }
+
+    public void consumeMessage(File file) {
+        System.err.println("consumeMessage file: " + file.getName());
     }
 }

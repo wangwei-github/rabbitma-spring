@@ -1,20 +1,11 @@
 package com.exercise.rabbitmqspring.entity;
 
-import java.util.Objects;
-
-public class Order {
-
+public class Order  {
     private String id;
     private String name;
     private String description;
 
     public Order() {
-    }
-
-    public Order(String id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
     }
 
     public String getId() {
@@ -45,15 +36,20 @@ public class Order {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Order order = (Order) o;
-        return Objects.equals(id, order.id) &&
-                Objects.equals(name, order.name) &&
-                Objects.equals(description, order.description);
+
+        if (!id.equals(order.id)) return false;
+        if (!name.equals(order.name)) return false;
+        return description.equals(order.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description);
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + description.hashCode();
+        return result;
     }
 
     @Override
