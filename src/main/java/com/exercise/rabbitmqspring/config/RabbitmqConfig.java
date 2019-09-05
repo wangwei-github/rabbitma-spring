@@ -23,7 +23,7 @@ import java.util.UUID;
 
 @Configuration
 public class RabbitmqConfig {
-    @Bean
+   /* @Bean
     public ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
         connectionFactory.setAddresses("192.168.11.129:5672");
@@ -40,9 +40,9 @@ public class RabbitmqConfig {
         return rabbitAdmin;
     }
 
-    /*针对消费者配置
+    *//*针对消费者配置
      * 设置交换机类型
-     * 将队列绑定到交换机*/
+     * 将队列绑定到交换机*//*
     @Bean
     public DirectExchange exchange001() {
         return new DirectExchange("exchange001", true, false);
@@ -109,43 +109,43 @@ public class RabbitmqConfig {
         container.setExposeListenerChannel(true);//显示通道
         container.setAcknowledgeMode(AcknowledgeMode.AUTO);//自动签收
         container.setConsumerTagStrategy(queue -> queue + "_" + UUID.randomUUID().toString());//设置消费者标签策略
-       /* container.setMessageListener((ChannelAwareMessageListener) (message, channel) -> {
+       *//* container.setMessageListener((ChannelAwareMessageListener) (message, channel) -> {
           String msg = new String(message.getBody()) ;
             System.err.println("--------消费者："+msg);
             System.err.println("--------消费者："+message.getMessageProperties().getConsumerTag());
-        });*/
+        });*//*
 
        //------------------------------------------
 
         MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
         adapter.setDefaultListenerMethod("consumeMessage");
-       /* HashMap<String,String> map = new HashMap<>();
+       *//* HashMap<String,String> map = new HashMap<>();
         map.put("queue005", "method2");
         map.put("queue001", "method");
         adapter.setQueueOrTagToMethodName(map);
-        adapter.setMessageConverter(new TextMessageConvert());*/
+        adapter.setMessageConverter(new TextMessageConvert());*//*
 
         //支持json格式的转换器
-       /* Jackson2JsonMessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
-        adapter.setMessageConverter(jackson2JsonMessageConverter);*/
+       *//* Jackson2JsonMessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
+        adapter.setMessageConverter(jackson2JsonMessageConverter);*//*
 
-      /*  //支持java对象转换Jackson2JsonMessageConverter & DefaultJackson2JavaTypeMapper
+      *//*  //支持java对象转换Jackson2JsonMessageConverter & DefaultJackson2JavaTypeMapper
         DefaultJackson2JavaTypeMapper javaTypeMapper = new DefaultJackson2JavaTypeMapper();
         //javaTypeMapper.setTrustedPackages("com.exercise");只能设置为*
         javaTypeMapper.setTrustedPackages("*");
         Jackson2JsonMessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
         jackson2JsonMessageConverter.setJavaTypeMapper(javaTypeMapper);
-        adapter.setMessageConverter(jackson2JsonMessageConverter);*/
+        adapter.setMessageConverter(jackson2JsonMessageConverter);*//*
 
          //支持java对象多映射转换 Jackson2JsonMessageConverter & DefaultJackson2JavaTypeMapper
-       /* Jackson2JsonMessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
+       *//* Jackson2JsonMessageConverter jackson2JsonMessageConverter = new Jackson2JsonMessageConverter();
         DefaultJackson2JavaTypeMapper javaTypeMapper = new DefaultJackson2JavaTypeMapper();
         HashMap<String,Class<?>>  javaClassMapper = new HashMap<>();
         javaClassMapper.put("order", com.exercise.rabbitmqspring.entity.Order.class);
         javaClassMapper.put("packaged", com.exercise.rabbitmqspring.entity.Packaged.class);
         javaTypeMapper.setIdClassMapping(javaClassMapper);
         jackson2JsonMessageConverter.setJavaTypeMapper(javaTypeMapper);
-        adapter.setMessageConverter(jackson2JsonMessageConverter);*/
+        adapter.setMessageConverter(jackson2JsonMessageConverter);*//*
 
        //支持pdf file流转换器
         //全局转换器
@@ -171,5 +171,5 @@ public class RabbitmqConfig {
         //------------------------------------------
         container.setMessageListener(adapter);
         return container;
-    }
+    }*/
 }
