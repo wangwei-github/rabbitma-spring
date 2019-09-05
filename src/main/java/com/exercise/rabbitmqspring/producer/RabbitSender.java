@@ -1,8 +1,10 @@
 package com.exercise.rabbitmqspring.producer;
 
+import com.exercise.rabbitmqspring.entity.Order;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
@@ -52,5 +54,18 @@ public class RabbitSender {
         //rabbitTemplate.convertAndSend("exchange-1","springboot.hello",msg,correlationData);
         rabbitTemplate.convertAndSend("exchange-1","lspringboot.hello",msg,correlationData);
 
+    }
+
+    @Value("${spring.rabbitmq.listener.order.exchange}")
+    private String exchange;
+    @Value("${spring.rabbitmq.listener.order.routing-key}")
+    private String routingKey;
+    public void  sendOrder(Order order){
+        String id = UUID.randomUUID().toString()+"_"+new Date().getTime();
+        CorrelationData correlationData = new CorrelationData(id);
+        rabbitTemplate.setConfirmCallback(confirmCallback);
+        rabbitTemplate.setReturnCallback(returnCallback);
+        rabbitTemplate.convertAndSend(exchange,
+                routingKey,order,correlationData);
     }
 }

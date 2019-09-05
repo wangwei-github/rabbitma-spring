@@ -8,7 +8,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
+import com.exercise.rabbitmqspring.entity.Order;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,7 +34,14 @@ public class SpringBootTests {
         rabbitSender.send("Hello SpringBoot RabbitMQ! ",properties);
     }
 
-
+    @Test
+    public void sendOrder() {
+        Order order = new Order();
+        order.setDescription("非常实用的汽车");
+        order.setId("001100");
+        order.setName("奥迪");
+        rabbitSender.sendOrder(order);
+    }
 
 
 }
