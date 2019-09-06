@@ -7,7 +7,6 @@ public class Packaged {
 
     public Packaged() {
     }
-
     public Packaged(String id, String name, String content) {
         this.id = id;
         this.name = name;

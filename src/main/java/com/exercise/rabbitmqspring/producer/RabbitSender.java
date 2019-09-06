@@ -1,6 +1,6 @@
 package com.exercise.rabbitmqspring.producer;
 
-import com.exercise.rabbitmqspring.entity.Order;
+import com.entity.rabbitmq.Order;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
